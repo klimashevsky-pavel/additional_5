@@ -1,7 +1,7 @@
 module.exports  = function check(str, bracketsConfig) {
 var checkArr = str.split('');
 var flag = [];
-var specCount = 0;
+var specCount = [];
 for(var i=0; i < checkArr.length; i++){
 	if(bracketsConfig.indexOf(checkArr[i]) == 1){
 		return false;
@@ -10,13 +10,13 @@ for(var i=0; i < checkArr.length; i++){
 	for(var j=0; j<bracketsConfig.length; j++){
 		if(checkArr[i] == bracketsConfig[j][0]){
 			if(checkArr[i] == bracketsConfig[j][1]){
-				if(specCount == 0){
+				if(specCount.length == 0 || specCount.indexOf(checkArr[i]) == -1){
 				flag.push(j)
-				specCount++
+				specCount.push(checkArr[i]);
 				}
 				else{
 					flag.pop();
-					specCount--;
+					specCount.pop(checkArr[i]);
 				}
 			}
 			else{flag.push(j)};
@@ -37,5 +37,4 @@ if(flag.length != 0){
 }
 return true;
 }
-
 
